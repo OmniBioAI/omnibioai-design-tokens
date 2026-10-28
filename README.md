@@ -47,7 +47,7 @@ Or in your JS/TS entry:
 import '@omnibioai/design-tokens/tokens.css';
 ```
 
-All 47 tokens are then available as CSS custom properties throughout your app:
+All design tokens are then available as CSS custom properties throughout your app:
 
 ```css
 .my-component {
@@ -59,6 +59,23 @@ All 47 tokens are then available as CSS custom properties throughout your app:
   font-family: var(--font-sans);
 }
 ```
+
+### Theme and preference selectors
+
+Set the attributes on the app root. Dark theme, teal accent, comfortable
+density, and system motion are the defaults. The legacy `--bg`, `--accent`,
+`--color-bg`, and related aliases remain available.
+
+```html
+<html data-theme="light" data-accent="blue"
+      data-density="comfortable" data-motion="system">
+```
+
+Supported values are `data-theme="light|dark"`,
+`data-accent="teal|blue|purple|orange"`,
+`data-density="comfortable|compact"`, and `data-motion="system|reduce"`.
+The semantic foregrounds and accent pairings are covered by contrast tests
+for WCAG AA (4.5:1).
 
 ### JS/ESM
 
@@ -205,9 +222,9 @@ No build step, no `dist/` directory — the source files are the published files
 
 ## Current version
 
-**v1.0.1**, published as `@omnibioai/design-tokens` to GitHub Packages.
-47 CSS custom properties — colors, typography, spacing,
-border radius, shadows, and layout.
+**v1.0.1** is the currently published version. The proposed version for the
+theme-selector and semantic-colour additions in this PR is **v1.1.0**; it is
+not published by this change.
 
 All OmniBioAI frontend surfaces (Electron app, web UI,
 ecosystem report) use these tokens as the single source of truth.
@@ -221,7 +238,7 @@ All tokens are defined in `tokens.css` as CSS custom properties on `:root`. When
 1. Add the CSS custom property to `tokens.css`
 2. Add the corresponding JS export to `tokens.js`
 3. Add the TypeScript type to `tokens.ts`
-4. Bump the version in `package.json` (semver — patch for new tokens, minor for removals)
+4. Bump the version in `package.json` (semver — minor for additive public APIs)
 5. Republish to GitHub Packages
 
 Never remove or rename an existing token without a major version bump — consumers depend on the exact property names.
